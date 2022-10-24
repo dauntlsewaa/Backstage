@@ -1,13 +1,13 @@
 // src/routes/index.tsx
 import React, { lazy, Suspense, FC } from "react";
 import { useRoutes } from "react-router-dom";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined, ShopOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 import {
   Layout,
   EmptyLayout,
-  // CompLayout
+  CompLayout
 } from "../layouts";
 import Loading from "@comps/Loading";
 import Redirect from "@comps/Redirect";
@@ -15,6 +15,8 @@ import Redirect from "@comps/Redirect";
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const NotFound = lazy(() => import("@pages/404"));
+const Trademark = lazy(() => import("@/pages/product/trademark"));
+const Attr = lazy(() => import("@/pages/product/attr"));
 
 const load = (Comp: FC) => {
   return (
@@ -47,6 +49,23 @@ const routes: XRoutes = [
         path: "/syt/dashboard",
         meta: { icon: <HomeOutlined />, title: "首页" },
         element: load(Dashboard),
+      },
+      {
+        path: "/syt/product",
+        meta: { icon: <ShopOutlined />, title: "商品管理" },
+        element: load(CompLayout),
+        children: [
+          {
+            path: "/syt/product/trademark",
+            meta: { title: "品牌管理" },
+            element: load(Trademark),
+          },
+          {
+            path: "/syt/product/arr",
+            meta: { title: "平台属性管理" },
+            element: load(Attr),
+          },
+        ]
       },
     ],
   },

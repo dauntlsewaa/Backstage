@@ -26,10 +26,10 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
 // 响应拦截器函数：得到响应之后触发的函数
 request.interceptors.response.use(
   (response: AxiosResponse<ResponseData<any>>) => {
-    if (response.data.code === 200) {
+    if (response.data.code === 20000) {
       return response.data.data;
     } else {
-      message.error(response.data.message);
+      // message.error(response.data.message);
       return Promise.reject(response.data.message);
     }
   },

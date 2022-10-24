@@ -1,7 +1,7 @@
 // src/routes/index.tsx
 import React, { lazy, Suspense, FC } from "react";
 import { useRoutes } from "react-router-dom";
-import { HomeOutlined } from "@ant-design/icons";
+import { HomeOutlined,SettingOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 
 import {
@@ -14,6 +14,7 @@ import Redirect from "@comps/Redirect";
 
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
+const User = lazy(() => import("@pages/acl/user"));
 const NotFound = lazy(() => import("@pages/404"));
 
 const load = (Comp: FC) => {
@@ -48,9 +49,21 @@ const routes: XRoutes = [
         meta: { icon: <HomeOutlined />, title: "首页" },
         element: load(Dashboard),
       },
+      // 权限管理
+      {
+        path: "/syt/acl",
+        meta: { icon:<SettingOutlined />, title: "权限管理" },
+        element: load(User) ,
+        children: [
+          {
+            path: "/syt/acl/user",
+            element: load(User),
+            meta: { title: "用户管理" },
+          },
+        ],
+      },
     ],
   },
-
   {
     path: "/404",
     element: load(NotFound),

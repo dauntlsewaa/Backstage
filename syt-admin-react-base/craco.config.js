@@ -27,6 +27,8 @@ module.exports = {
   ],
   // 开发服务器配置
   devServer: {
+    host:'127.0.0.1',
+    port:8080,
     // 激活代理服务器
     proxy: {
       // 将来以/dev-api开头的请求，就会被开发服务器转发到目标服务器去。

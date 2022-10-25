@@ -44,7 +44,8 @@ export const logoutAsync = createAsyncThunk("user/logout", () => {
 
 // 获取用户信息
 export const getInfoAsync = createAsyncThunk("user/getInfo", () => {
-  return reqGetInfo();
+  let  result = reqGetInfo()
+  return result;
 });
 
 // 创建redux模块
@@ -98,11 +99,12 @@ export const userSlice = createSlice({
       })
       .addCase(getInfoAsync.fulfilled, (state, action) => {
         const { name, avatar, buttons, routes } = action.payload;
-        
+
         state.name = name;
         state.avatar = avatar;
         state.buttons = buttons;
         state.routes = routes;
+        // console.log()
       });
   },
 });

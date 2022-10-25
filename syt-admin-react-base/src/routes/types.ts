@@ -6,6 +6,7 @@ export interface XMeta {
 }
 
 export interface XRoute extends RouteObject {
+  name?: string
   meta?: XMeta;
   children?: XRoutes;
   hidden?: boolean;

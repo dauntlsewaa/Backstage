@@ -98,6 +98,7 @@ export const userSlice = createSlice({
       })
       .addCase(getInfoAsync.fulfilled, (state, action) => {
         const { name, avatar, buttons, routes } = action.payload;
+        
         state.name = name;
         state.avatar = avatar;
         state.buttons = buttons;

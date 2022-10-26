@@ -13,8 +13,7 @@ function Login() {
 
   const onFinish = async (values: any) => {
     const res = await dispatch(loginAsync(values));
-
-    if (res.type === "user/login/fulfilled") {
+    if (res.type === "user/login/rejected") {
       navigate("/syt/dashboard");
     }
   };

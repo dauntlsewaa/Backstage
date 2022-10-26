@@ -60,6 +60,7 @@ function User() {
 
     setTotal(result.total)
     setUserData(result.items)
+    
   }
 
   // 查询按钮回调

@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="705bc28c-ab9e-46f1-b040-636a46aea6be" name="变更" comment="">
-      <change beforePath="$PROJECT_DIR$/syt-admin-react-base/craco.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/syt-admin-react-base/craco.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/syt-admin-react-base/src/pages/login/slice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/syt-admin-react-base/src/pages/login/slice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/syt-admin-react-base/src/pages/product/trademark/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/syt-admin-react-base/src/pages/product/trademark/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/syt-admin-react-base/src/routes/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/syt-admin-react-base/src/routes/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -77,6 +76,7 @@
       <workItem from="1666614117865" duration="4968000" />
       <workItem from="1666657814564" duration="9944000" />
       <workItem from="1666668119065" duration="443000" />
+      <workItem from="1666764806794" duration="302000" />
     </task>
     <servers />
   </component>

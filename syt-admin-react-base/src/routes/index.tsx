@@ -2,22 +2,22 @@
 import React, {lazy, Suspense, FC} from "react";
 import {useRoutes} from "react-router-dom";
 import {HomeOutlined, SettingOutlined ,ShopOutlined} from "@ant-design/icons";
-import type {XRoutes} from "./types";
+import type {XRoutes} from "@/routes/types";
 import {useAppSelector} from "@/app/hooks";
-import {selectUser} from "@pages/login/slice";
+import {selectUser} from "@/pages/login/slice";
 import {
     Layout,
     EmptyLayout,
     CompLayout
-} from "../layouts";
-import Loading from "@comps/Loading";
-import Redirect from "@comps/Redirect";
+} from "@/layouts";
+import Loading from "@/components/Loading";
+import Redirect from "@/components/Redirect";
 
-const Login = lazy(() => import("@pages/login"));
-const Dashboard = lazy(() => import("@pages/dashboard"));
-const User = lazy(() => import("@pages/acl/user"));
-const NotFound = lazy(() => import("@pages/404"));
-const Trademark = lazy(() => import("@pages/product/trademark"))
+const Login = lazy(() => import("@/pages/login"));
+const Dashboard = lazy(() => import("@/pages/dashboard"));
+const User = lazy(() => import("@/pages/acl/user"));
+const NotFound = lazy(() => import("@/pages/404"));
+const Trademark = lazy(() => import("@/pages/product/trademark"))
 
 const load = (Comp: FC) => {
     return (

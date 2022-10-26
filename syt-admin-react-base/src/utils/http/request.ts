@@ -27,7 +27,7 @@ request.interceptors.request.use((config: AxiosRequestConfig) => {
 request.interceptors.response.use(
   (response: AxiosResponse<ResponseData<any>>) => {
 
-    if (response.data.code === 20000) {
+    if (response.data.code === 20000 || response.data.code === 200) {
       return response.data.data;
     } else {
       message.error(response.data.message);

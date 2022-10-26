@@ -60,9 +60,8 @@ export default function Trademark() {
   const handleOk = async () => {
     //关闭对话框
     setIsModalOpen(false);
-    const tmName = form.getFieldsValue().tmName
-    const logoUrl = form.getFieldsValue().logoUrl
-    // console.log(logoUrl);
+    const { tmName, logoUrl } = form.getFieldsValue()
+
 
     setAddAParams({ tmName, logoUrl })
 
@@ -272,7 +271,7 @@ export default function Trademark() {
           <Form.Item
             label="品牌名称"
             name="tmName"
-            rules={[{ required: true, message: '必须要输入品牌名称!' }]}
+            rules={[{ required: true, min: 4, max: 8, message: '必须要输入品牌名称!' }]}
             initialValue=""
           >
             <Input />

@@ -141,6 +141,7 @@ function User() {
   const showModal: any = (row: any) => {
 
     return () => {
+      setAllocation([])
       setIsModalOpen(true);
       UserForm.setFieldsValue({ username: '', nickName: '', password: '' })
       setIsShow(true)

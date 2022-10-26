@@ -102,21 +102,26 @@ export const RenderRoutes = () => {
     }
     const data = findUserAsyncRoutes(allAsyncRoutes, result1)
 
+    let rou: any = []
     routes.forEach((item) => {
 
         if (item.path === '/syt') {
+            rou = Array.from(new Set(item.children))
             data.forEach(val => {
                 item.children?.forEach(res => {
-                    if (val.path != res.path) {
+                    if (val.path !== res.path) {
                         item.children?.push(val)
                     }
+
+
                 })
             })
         }
+
     })
-
-    // }
-
+    if (rou.length > 1) {
+        routes[1].children = rou
+    }
     return useRoutes(routes);
 
 };

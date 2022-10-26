@@ -60,7 +60,7 @@ function User() {
 
     setTotal(result.total)
     setUserData(result.items)
-    
+
   }
 
   // 查询按钮回调
@@ -120,6 +120,7 @@ function User() {
     {
       title: '操作',
       key: 'action',
+      width: '260px',
       render: (row: any, rec: any, index: number) => (
         <>
           <Button className="hospital-btn" type="primary" size="middle" icon={<UserAddOutlined />} onClick={updateUser(row)} />
@@ -160,14 +161,14 @@ function User() {
 
 
     if (allocation.length) {
-     
+
       let data = {
         userId: userId,
         roleId: userInfoId.join(':')
       }
       await reqAssign(data)
       message.success('分配角色成功')
-     
+
 
     } else {
       let data = UserForm.getFieldsValue()
@@ -334,16 +335,16 @@ function User() {
             <Input disabled={allocation.length ? true : false} />
           </Form.Item>
           {user}
-          <Form.Item style={{ textAlign:"right"}} >
-          <Button className="hospital-btn mb" type="primary" htmlType="submit" onClick={handleOk}>
-            确定
-          </Button>
-          <Button className="hospital-btn mb" onClick={handleCancel} >
-            取消
-          </Button>
-        </Form.Item>
-      </Form>
-    </Modal>
+          <Form.Item style={{ textAlign: "right" }} >
+            <Button className="hospital-btn mb" type="primary" htmlType="submit" onClick={handleOk}>
+              确定
+            </Button>
+            <Button className="hospital-btn mb" onClick={handleCancel} >
+              取消
+            </Button>
+          </Form.Item>
+        </Form>
+      </Modal>
 
     </Card >
   );

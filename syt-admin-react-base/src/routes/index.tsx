@@ -1,10 +1,10 @@
 // src/routes/index.tsx
-import React, {lazy, Suspense, FC} from "react";
-import {useRoutes} from "react-router-dom";
-import {HomeOutlined, SettingOutlined} from "@ant-design/icons";
-import type {XRoutes} from "./types";
-import {useAppSelector} from "@/app/hooks";
-import {selectUser} from "@pages/login/slice";
+import React, { lazy, Suspense, FC } from "react";
+import { useRoutes } from "react-router-dom";
+import { HomeOutlined, SettingOutlined } from "@ant-design/icons";
+import type { XRoutes } from "./types";
+import { useAppSelector } from "@/app/hooks";
+import { selectUser } from "@pages/login/slice";
 import {
     Layout,
     EmptyLayout,
@@ -23,9 +23,9 @@ const load = (Comp: FC) => {
         // 因为路由懒加载，组件需要一段网络请求时间才能加载并渲染
         // 在组件还未渲染时，fallback就生效，来渲染一个加载进度条效果
         // 当组件渲染完成时，fallback就失效了
-        <Suspense fallback={<Loading/>}>
+        <Suspense fallback={<Loading />}>
             {/* 所有lazy的组件必须包裹Suspense组件，才能实现功能 */}
-            <Comp/>
+            <Comp />
         </Suspense>
     );
 };
@@ -34,7 +34,7 @@ const allAsyncRoutes: XRoutes = [
     {
         path: "/syt/acl",
         name: 'Acl',
-        meta: {icon: <SettingOutlined/>, title: "权限管理"},
+        meta: { icon: <SettingOutlined />, title: "权限管理" },
         element: load(User),
         children: [
             {
@@ -42,7 +42,7 @@ const allAsyncRoutes: XRoutes = [
                 path: "/syt" +
                     "/acl/user",
                 element: load(User),
-                meta: {title: "用户管理"},
+                meta: { title: "用户管理" },
             },
         ],
     },
@@ -50,7 +50,7 @@ const allAsyncRoutes: XRoutes = [
 const routes: XRoutes = [
     {
         path: "/",
-        element: <EmptyLayout/>,
+        element: <EmptyLayout />,
 
         children: [
             {
@@ -61,14 +61,11 @@ const routes: XRoutes = [
     },
     {
         path: "/syt",
-        element: <Layout/>,
+        element: <Layout />,
         children: [
-            // ...allAsyncRoutes
-
-            // ,,
             {
                 path: "/syt/dashboard",
-                meta: {icon: <HomeOutlined/>, title: "首页"},
+                meta: { icon: <HomeOutlined />, title: "首页" },
                 element: load(Dashboard),
             },
 
@@ -81,7 +78,7 @@ const routes: XRoutes = [
     },
     {
         path: "*",
-        element: <Redirect to="/404"/>,
+        element: <Redirect to="/404" />,
     },
 
 ];
@@ -93,8 +90,6 @@ export const RenderRoutes = () => {
     // react-router-dom的新增语法。不用自己遍历了，它帮我们遍历生成
     const result = useAppSelector(selectUser).routes
     const result1 = [...result]
-    // console.log(result1,111)
-    // const two =(allAsyncRoutes:any , routes:any){}
     const findUserAsyncRoutes = (allAsyncRoutes: any, routes: any): XRoutes => {
         return allAsyncRoutes.filter((item: any) => {
             if (routes.indexOf(item.name as string) !== -1) {
@@ -106,23 +101,19 @@ export const RenderRoutes = () => {
         })
     }
     const data = findUserAsyncRoutes(allAsyncRoutes, result1)
-    // if (a) {
-    //     a = false
-    //     console.log(  11111  )
 
-        routes.forEach((item)=>{
+    routes.forEach((item) => {
 
-            if (item.path === '/syt'){
-                data.forEach(val=>{
-                    item.children?.forEach(res=>{
-                        if(val.path != res.path){
-
-                            item.children?.push(val)
-                        }
-                    })
+        if (item.path === '/syt') {
+            data.forEach(val => {
+                item.children?.forEach(res => {
+                    if (val.path != res.path) {
+                        item.children?.push(val)
+                    }
                 })
-            }
-        })
+            })
+        }
+    })
 
     // }
 

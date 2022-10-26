@@ -159,12 +159,14 @@ function User() {
 
 
     if (allocation.length) {
+     
       let data = {
         userId: userId,
         roleId: userInfoId.join(':')
       }
       await reqAssign(data)
       message.success('分配角色成功')
+     
 
     } else {
       let data = UserForm.getFieldsValue()
@@ -276,7 +278,7 @@ function User() {
         onFinish={onFinish}
       >
         <Form.Item
-          name="username"
+          name="name"
           rules={[{ required: true, message: '请输入用户名!' }]}
         >
           <Input />
@@ -316,27 +318,33 @@ function User() {
 
 
       {/* 对话框 */}
-      <Modal title={userId ? "修改用户" : "添加用户"} visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={900} >
+      <Modal title={userId ? "修改用户" : "添加用户"} visible={isModalOpen} width={900} footer={null} >
         <Form
-          name="addUser"
           labelCol={{ span: 6 }}
           wrapperCol={{ span: 18 }}
           initialValues={{ remember: true }}
           form={UserForm}
-
         >
           <Form.Item
             label="用户名称"
             name="username"
-            rules={[{ required: true, message: '请输入用户名称' }]}
+            rules={[{ required: true, min: 4, max: 8, message: '请输入用户名称' }]}
           >
             <Input disabled={allocation.length ? true : false} />
           </Form.Item>
           {user}
-        </Form>
-      </Modal>
+          <Form.Item style={{ textAlign:"right"}} >
+          <Button className="hospital-btn mb" type="primary" htmlType="submit" onClick={handleOk}>
+            确定
+          </Button>
+          <Button className="hospital-btn mb" onClick={handleCancel} >
+            取消
+          </Button>
+        </Form.Item>
+      </Form>
+    </Modal>
 
-    </Card>
+    </Card >
   );
 }
 

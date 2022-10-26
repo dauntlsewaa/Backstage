@@ -1,10 +1,10 @@
-import React, {useEffect, useState} from "react";
-import {useLocation, useNavigate} from "react-router-dom";
-import {Layout, Menu} from "antd";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Layout, Menu } from "antd";
 
-import {findSideBarRoutes} from "@/routes";
-import {XRoutes} from "@/routes/types";
-import type {MenuProps} from "antd";
+import { findSideBarRoutes } from "@/routes";
+import { XRoutes } from "@/routes/types";
+import type { MenuProps } from "antd";
 
 import "./index.less";
 import logo from "./images/logo.png";
@@ -22,7 +22,7 @@ function getItem(label: React.ReactNode, key: React.Key, icon?: React.ReactNode,
     } as MenuItem;
 }
 
-const {Sider} = Layout;
+const { Sider } = Layout;
 
 interface MenuInfo {
     key: string;
@@ -37,6 +37,7 @@ function SideBar() {
     const [openKeys, setOpenKeys] = useState<string[]>([]);
     const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
+
     const onCollapse = (collapsed: boolean) => {
         setCollapsed(collapsed);
     };
@@ -44,7 +45,7 @@ function SideBar() {
     const location = useLocation();
     const navigate = useNavigate();
 
-    const {pathname} = location;
+    const { pathname } = location;
 
     useEffect(() => {
         const openKeys = pathname.split("/").slice(0, 3).join("/");
@@ -59,7 +60,6 @@ function SideBar() {
     const routes = findSideBarRoutes() as XRoutes;
 
     const menuItems: MenuItem[] = routes.map((route) => {
-        // console.log(route)
         return getItem(
             route.meta?.title,
             route.path as string,
@@ -72,8 +72,8 @@ function SideBar() {
                 .filter(Boolean)
         );
     });
-
-    const handleMenuClick = ({key}: MenuInfo) => {
+    let items = new Set(menuItems)
+    const handleMenuClick = ({ key }: MenuInfo) => {
         navigate(key);
     };
 
@@ -84,11 +84,11 @@ function SideBar() {
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={onCollapse} breakpoint="lg">
             <h1 className="layout-title">
-                <img className="layout-logo" src={logo} alt="logo"/>
-                <span style={{display: collapsed ? "none" : "inline-block"}}>中舞网中台系统</span>
+                <img className="layout-logo" src={logo} alt="logo" />
+                <span style={{ display: collapsed ? "none" : "inline-block" }}>中舞网中台系统</span>
             </h1>
             <Menu theme="dark" mode="inline" openKeys={openKeys} selectedKeys={selectedKeys} items={menuItems}
-                  onClick={handleMenuClick} onOpenChange={handleOpenChange}></Menu>
+                onClick={handleMenuClick} onOpenChange={handleOpenChange}></Menu>
         </Sider>
     );
 }

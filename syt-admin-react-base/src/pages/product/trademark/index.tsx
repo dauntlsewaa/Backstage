@@ -265,7 +265,7 @@ export default function Trademark() {
         }
       />
       {/* 对话框 */}
-      <Modal title="添加品牌" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} >
+      <Modal title="添加品牌" visible={isModalOpen} onOk={handleOk} onCancel={handleCancel} footer={[]}>
         {/* 表单 */}
         <Form form={form} style={{ marginTop: 20 }}>
           {/* 品牌名称输入框 */}
@@ -296,9 +296,14 @@ export default function Trademark() {
               {addAParams.logoUrl ? <img src={addAParams.logoUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
             </Upload>
           </Form.Item>
-          {/* <Form.Item>
-              <Button htmlType="submit" type="primary"></Button>
-          </Form.Item> */}
+          <Form.Item>
+            <Button htmlType="submit" type="primary"></Button>
+            <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form.Item>
         </Form>
       </Modal>
     </Card>

@@ -69,7 +69,7 @@ function SideBar() {
                     if (item.hidden) return null;
                     return getItem(item.meta?.title, item.path as string, item.meta?.icon);
                 })
-                .filter(Boolean)
+                // .filter(Boolean)
         );
     });
     let items = new Set(menuItems)

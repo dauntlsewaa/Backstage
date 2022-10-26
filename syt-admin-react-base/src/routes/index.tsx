@@ -1,7 +1,7 @@
 // src/routes/index.tsx
 import React, { lazy, Suspense, FC } from "react";
 import { useRoutes } from "react-router-dom";
-import { HomeOutlined, SettingOutlined } from "@ant-design/icons";
+import { HomeOutlined, SettingOutlined, ShopOutlined } from "@ant-design/icons";
 import type { XRoutes } from "./types";
 import { useAppSelector } from "@/app/hooks";
 import { selectUser } from "@pages/login/slice";
@@ -16,6 +16,7 @@ import Redirect from "@comps/Redirect";
 const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const User = lazy(() => import("@pages/acl/user"));
+const Trademark = lazy(() => import("@pages/product/trademark/index"));
 const NotFound = lazy(() => import("@pages/404"));
 
 const load = (Comp: FC) => {
@@ -39,13 +40,26 @@ const allAsyncRoutes: XRoutes = [
         children: [
             {
                 name: 'User',
-                path: "/syt" +
-                    "/acl/user",
+                path: "/syt/acl/user",
                 element: load(User),
                 meta: { title: "用户管理" },
             },
         ],
     },
+    {
+        path: "/syt/product",
+        name: 'Acl',
+        meta: { icon: <ShopOutlined />, title: "商品管理" },
+        element: load(Trademark),
+        children: [
+            {
+                path: "/syt/product/trademark",
+                name: 'Trademark',
+                meta: { title: "品牌管理" },
+                element: load(Trademark),
+            },
+        ]
+    }
 ]
 const routes: XRoutes = [
     {
@@ -82,7 +96,6 @@ const routes: XRoutes = [
     },
 
 ];
-let a = true
 // 渲染路由
 // 注意：首字母必须大写
 export const RenderRoutes = () => {
@@ -109,7 +122,7 @@ export const RenderRoutes = () => {
             rou = Array.from(new Set(item.children))
             data.forEach(val => {
                 item.children?.forEach(res => {
-                    if (val.path !== res.path) {
+                    if (val.name !== res.name) {
                         item.children?.push(val)
                     }
 
@@ -119,9 +132,14 @@ export const RenderRoutes = () => {
         }
 
     })
+
+
     if (rou.length > 1) {
-        routes[1].children = rou
+        for (var i = 0; i < 2; i++) {
+            routes[1].children = rou
+        }
     }
+
     return useRoutes(routes);
 
 };

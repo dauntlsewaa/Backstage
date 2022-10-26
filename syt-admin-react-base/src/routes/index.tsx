@@ -1,14 +1,14 @@
 // src/routes/index.tsx
 import React, {lazy, Suspense, FC} from "react";
 import {useRoutes} from "react-router-dom";
-import {HomeOutlined, SettingOutlined} from "@ant-design/icons";
+import {HomeOutlined, SettingOutlined ,ShopOutlined} from "@ant-design/icons";
 import type {XRoutes} from "./types";
 import {useAppSelector} from "@/app/hooks";
 import {selectUser} from "@pages/login/slice";
 import {
     Layout,
     EmptyLayout,
-    // CompLayout
+    CompLayout
 } from "../layouts";
 import Loading from "@comps/Loading";
 import Redirect from "@comps/Redirect";
@@ -17,6 +17,7 @@ const Login = lazy(() => import("@pages/login"));
 const Dashboard = lazy(() => import("@pages/dashboard"));
 const User = lazy(() => import("@pages/acl/user"));
 const NotFound = lazy(() => import("@pages/404"));
+const Trademark = lazy(() => import("@pages/product/trademark"))
 
 const load = (Comp: FC) => {
     return (
@@ -39,12 +40,26 @@ const allAsyncRoutes: XRoutes = [
         children: [
             {
                 name: 'User',
-                path: "/syt" +
-                    "/acl/user",
+                path: "/syt/acl/user",
                 element: load(User),
                 meta: {title: "用户管理"},
             },
         ],
+    },
+    // 品牌管理
+    {
+        path: "/syt/product",
+        name: 'Acl',
+        meta: { icon: <ShopOutlined />, title: "商品管理" },
+        element: load(CompLayout),
+        children: [
+            {
+                name: 'Acl',
+                path: "/syt/product/trademark",
+                meta: { title: "品牌管理" },
+                element: load(Trademark),
+            },
+        ]
     },
 ]
 const routes: XRoutes = [
